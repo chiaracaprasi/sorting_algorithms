@@ -5,13 +5,14 @@
  * @A: the array of integers
  * @left: the left index of the array that we are partitioning
  * @right: the right most index
+ * @size: size of array
  * Return: the index at which index is placed after partitioning
  */
 
 int partition(int *A, int size, int left, int right)
 {
 	int i, j, temp, pivot;
-	
+
 	pivot = A[right];
 	i = left - 1;
 	j = left;
@@ -45,6 +46,7 @@ int partition(int *A, int size, int left, int right)
  * @A: the array of ints that we are sorting
  * @left: the leftmost index to sort
  * @right: the rightmost index to sort
+ * @size: size of array
  * Return: is void
  */
 
