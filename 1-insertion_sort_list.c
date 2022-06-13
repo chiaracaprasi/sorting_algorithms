@@ -1,4 +1,23 @@
+#include <stddef.h>
 #include "sort.h"
+
+/**
+ * count_list_length - returns the length of a linked list
+ * @list: a ptr to the list
+ * Return: the list length
+ */
+
+int count_list_length(listint_t *list)
+{
+	int length = 0;
+
+	while (list != NULL)
+	{
+		list = list->next;
+		length++;
+	}
+	return (length);
+}
 
 /**
  * swap_nodes - swaps two nodes in a linked list
@@ -33,44 +52,36 @@ void insertion_sort_list(listint_t **list)
 	if (list == NULL || *list == NULL)
 		return;
 
-	temp = *list;
-	while (temp != NULL)
-	{
-		count++;
-		if (count > 2)
-			break;
-		temp = temp->next;
-	}
+	count = count_list_length(*list);
+	if (count < 2)
+		return;
 
 	current = *list;
 	while (current != NULL)
 	{
+		swap = 0;
 		if (current->next != NULL)
 		{
 			if (current->n > (current->next)->n)
 			{
+				temp = current->next;
 				swap_nodes(current, current->next);
 				swap = 1;
 				print_list(*list);
-				temp = current->prev;
-				while (temp != NULL)
-				{
-					if (temp->prev == NULL)
-						break;
-					if (temp->n < (temp->prev)->n)
-					{
-						swap_nodes(temp->prev, temp);
-					}
-					else
-						break;
-				}
 				if (temp->prev == NULL)
 					*list = temp;
+				while (temp != NULL && temp->prev != NULL)
+				{
+					if ((temp->prev)->n < temp->n)
+						break;
+					swap_nodes(temp->prev, temp);
+					if (temp->prev == NULL)
+						*list = temp;
+					print_list(*list);
+				}
 			}
 		}
 		if (swap == 0)
 			current = current->next;
-		else
-			swap = 0;
 	}
 }
