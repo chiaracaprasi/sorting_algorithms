@@ -27,11 +27,20 @@ void swap_nodes(listint_t *current, listint_t *next)
 
 void insertion_sort_list(listint_t **list)
 {
-	int swap = 0;
+	int swap = 0, count = 0;
 	listint_t *current, *temp;
 
 	if (list == NULL || *list == NULL)
 		return;
+
+	temp = *list;
+	while (temp != NULL)
+	{
+		count++;
+		if (count > 2)
+			break;
+		temp = temp->next;
+	}
 
 	current = *list;
 	while (current != NULL)
