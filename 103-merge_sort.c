@@ -27,11 +27,13 @@ void top_down_merge(int *copy, int *array, int left, int mid, int right)
 	{
 		if (i < mid && (j >= right || array[i] <= array[j]))
 		{
+			printf("copy[%d] = %d, array[%d] = %d \n", k, copy[k], i, array[i]);
 			copy[k] = array[i];
 			i++;
 		}
 		else
 		{
+			printf("copy[%d] = %d, array[%d] = %d\n", k, copy[k], j, array[j]);
 			copy[k] = array[j];
 			j++;
 		}
@@ -70,7 +72,7 @@ void merge_recursive(int *array, int *copy_arr, int left, int right)
  */
 void merge_sort(int *array, size_t size)
 {
-	int *copy_arr;
+	int *copy_arr, i;
 
 	if (array == NULL || size < 2)
 		return;
@@ -80,5 +82,9 @@ void merge_sort(int *array, size_t size)
 		return;
 
 	merge_recursive(array, copy_arr, 0, size);
-	free(array);
+
+	for (i = 0; i < (int)size; i++)
+		array[i] = copy_arr[i];
+
+	free(copy_arr);
 }
