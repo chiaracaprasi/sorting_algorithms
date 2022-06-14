@@ -18,9 +18,9 @@ void counting_sort(int *array, size_t size)
 
 	if (size < 2)
 		return;
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (unsigned int)size; i++)
 	{
-		if ((int)size > largest_number)
+		if ((unsigned int)array[i] > largest_number)
 			largest_number = array[i];
 	}
 	new_array = malloc(sizeof(*new_array * (largest_number + 1)));
@@ -30,8 +30,7 @@ void counting_sort(int *array, size_t size)
 	{
 		for (j = 0; j < size; j++)
 		{
-			temp = array[j];
-			if (temp == i)
+			if ((unsigned int)array[j] == i)
 				count++;
 		}
 		new_array[i] = count;
@@ -44,7 +43,7 @@ void counting_sort(int *array, size_t size)
 	j = 0;
 	for (i = 0; i <= largest_number; i++)
 	{
-		if ((int)new_array[i] > count)
+		if ((unsigned int)new_array[i] > count)
 		{
 			array[j] = i;
 			j++;
