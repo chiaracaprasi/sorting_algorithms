@@ -70,7 +70,7 @@ void merge_recursive(int *array, int *copy_arr, int left, int right)
  */
 void merge_sort(int *array, size_t size)
 {
-       	int *copy_arr;
+	int *copy_arr;
 
 	if (array == NULL || size < 2)
 		return;
