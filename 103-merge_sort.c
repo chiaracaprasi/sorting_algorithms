@@ -15,7 +15,7 @@
 
 void top_down_merge(int *copy, int *array, int left, int mid, int right)
 {
-	int i = left, j =  mid, k = 0;
+	int i = left, j = mid, k = 0;
 
 	printf("Merging...\n");
 	printf("[left]: ");
@@ -37,7 +37,7 @@ void top_down_merge(int *copy, int *array, int left, int mid, int right)
 		}
 	}
 	printf("[Done]: ");
-	print_array(array + left, right - left);
+	print_array(copy + left, right - left);
 }
 
 /**
@@ -58,7 +58,7 @@ void merge_recursive(int *array, int *copy_arr, int left, int right)
 		middle = (right - left) / 2 + left;
 		merge_recursive(array, copy_arr, left, middle);
 		merge_recursive(array, copy_arr, middle, right);
-		top_down_merge(array, copy_arr, left, middle, right);
+		top_down_merge(copy_arr, array, left, middle, right);
 	}
 }
 
@@ -71,7 +71,6 @@ void merge_recursive(int *array, int *copy_arr, int left, int right)
 void merge_sort(int *array, size_t size)
 {
 	int *copy_arr;
-
 	if (array == NULL || size < 2)
 		return;
 
