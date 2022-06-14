@@ -39,6 +39,10 @@ void top_down_merge(int *copy, int *array, int left, int mid, int right)
 		}
 	}
 	printf("[Done]: ");
+
+	for (i = left; i < right; i++)
+		array[i] = copy[i];
+	
 	print_array(copy + left, right - left);
 }
 
