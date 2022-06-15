@@ -20,7 +20,7 @@ void top_down_merge(int *copy, int *array, int left, int mid, int right)
 	printf("Merging...\n");
 	printf("[left]: ");
 	print_array(array + left, mid - left);
-	printf("[right] ");
+	printf("[right]: ");
 	print_array(array + mid, right - mid);
 
 	for (k = left; k < right; k++)
