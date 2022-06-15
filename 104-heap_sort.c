@@ -3,31 +3,31 @@
 /**
  * siftDown - fixes a heap
  * @array: array to sort
- * @key: size of array
+ * @size: size of array
  * @root: root of the heap
- * @last: last index of heap
+ * @h: heap size
  * Return: void
  */
 
-void siftDown(int key, int *array, int root, int last)
+void siftDown(int *array, int size, int root, int h)
 {
-	int bigger = 2 * root;
+	int max = root, l = root * 2 + 1, r = root * 2 + 2;
+	int temp;
 
-	while (bigger <= last)
+	if (l < h && array[l] > array[max])
+		max = l;
+
+	if (r < h && array[r] > array[max])
+		max = r;
+
+	if (max != root)
 	{
-		if (bigger < last)
-		{
-			if (array[bigger + 1] > array[bigger])
-				bigger++;
-		}
-		if (key >= array[bigger])
-			break;
-
-		array[root] =  array[bigger];
-		root = bigger;
-		bigger = 2 * root;
+		temp = array[root];
+		array[root] = array[max];
+		array[max] = temp;
+		print_array(array, size);
+		siftDown(array, size, max, h);
 	}
-	array[root] = key;
 }
 
 /**
@@ -38,18 +38,21 @@ void siftDown(int key, int *array, int root, int last)
  */
 void heap_sort(int *array, size_t size)
 {
-	unsigned int i, j, item;
+	unsigned int i, temp;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = size / 2; i >= 1; i--)
-		siftDown(array[i], array, i, size);
+	for (i = size / 2 - 1; i > 0; i--)
+		siftDown(array, size, i, size);
 
-	for (j = size; j > 1; j--)
+	for (i = size - 1; i > 0; i--)
 	{
-		item = array[j];
-		array[j] = array[1];
-		siftDown(item, array, 1, j - 1);
+		temp = array[i];
+		array[i] = array[0];
+		array[0] = temp;
+		if (i != 0)
+			print_array(array, size);
+		siftDown(array, size, 0, i);
 	}
 }
